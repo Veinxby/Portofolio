@@ -101,7 +101,11 @@
             align-items:center;
             font-weight:500;
         }
-        nav.primary a{ padding:0.2rem 0.35rem; border-radius:6px; }
+        nav.primary a { 
+            padding:0.2rem 0.35rem; 
+            border-radius:6px; 
+            transition:color .25s ease;
+        }
         nav.primary a:hover { color: var(--accent); }
         nav.primary a:focus{ color: var(--accent); outline:2px solid rgba(201,167,100,0.14); outline-offset:3px; }
 
@@ -255,14 +259,11 @@
 
         /* About */
         .about {
-            display:grid; gap:1rem; align-items:start;
+            display:grid; 
+            gap:1rem; 
+            align-items:start;
         }
-        .about-grid {
-            display:grid; gap:1rem;
-        }
-        @media (min-width:768px) {
-            .about-grid{ grid-template-columns: 1fr 320px; }
-        }
+
         .card {
             background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
             border-radius: var(--radius);
@@ -272,27 +273,33 @@
         }
 
 
-        /* Skills */
-        .skills{
-            display:grid; gap:0.75rem;
+        /* skills card */
+        .skills-grid{
+            display:grid;
+            gap:1rem;
+            grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
         }
-        .skill-row{ display:flex; align-items:center; justify-content:space-between; gap:.75rem; }
-        .skill-name{ color:var(--muted); font-weight:600; }
-        .skill-bar{
-            flex:1;
-            height:10px;
-            background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-            margin-left:0.75rem;
-            border-radius:999px;
-            overflow:hidden;
-            border:1px solid rgba(255,255,255,0.02);
+
+        .skill-card{
+            padding:.9rem 1rem;
+            border-radius:12px;
+            background:rgba(255,255,255,0.03);
+            border:1px solid rgba(255,255,255,0.06);
+            font-weight:600;
+            color:var(--text);
+            text-align:center;
+            transition:.25s ease;
+            display:flex;
+            align-items:center;         /* center vertical */
+            justify-content:center;     /* center horizontal */
         }
-        .skill-fill{
-            height:100%;
-            width:0%;
-            background: linear-gradient(90deg, rgba(201,167,100,0.95), rgba(57,160,160,0.8));
-            transition: width 900ms cubic-bezier(.2,.9,.3,1);
+
+        .skill-card:hover{
+            transform:translateY(-3px);
+            border-color:rgba(255,255,255,0.16);
+            background:rgba(255,255,255,0.06);
         }
+
 
 
         /* Portfolio grid + unique hover border */
@@ -302,10 +309,14 @@
             gap:1rem;
         }
         @media (min-width:768px){
-            .projects-grid{ grid-template-columns: repeat(2, 1fr); }
+            .projects-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+            }
         }
         @media (min-width:1024px){
-            .projects-grid{ grid-template-columns: repeat(3, 1fr); }
+            .projects-grid { 
+                grid-template-columns: repeat(3, 1fr); 
+            }
         }
 
         .project-card{
@@ -321,7 +332,11 @@
             border:1px solid rgba(255,255,255,0.03);
             transition: transform var(--transition), box-shadow var(--transition);
         }
-        .project-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 50px rgba(3,8,20,0.7); }
+
+        .project-card:hover{ 
+            transform: translateY(-6px); 
+            box-shadow: 0 18px 50px rgba(3,8,20,0.7); 
+        }
 
         
         /* Unique detail: animated gradient border on hover */
@@ -435,6 +450,7 @@
             <!-- Desktop nav -->
             <nav class="primary" aria-label="Primary navigation">
                 <a href="#about">About</a>
+                <a href="#skills">Skills</a>
                 <a href="#projects">Projects</a>
                 <a href="#experience">Experience</a>
                 <a href="#testimonials">Testimonials</a>
@@ -442,13 +458,13 @@
 
             <!-- Social Icons -->
             <div class="socials">
-                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/teguh-imaduddin-650015324?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" aria-label="LinkedIn">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-                <a href="https://github.com" target="_blank" aria-label="GitHub">
+                <a href="https://github.com/Veinxby" target="_blank" aria-label="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="mailto:email@example.com" aria-label="Email">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mteguh0106@gmail.com" target="_blank" aria-label="Email">
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
@@ -465,6 +481,7 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="mobile-menu" role="menu" aria-hidden="true">
         <a href="#about" role="menuitem">About</a><br/>
+        <a href="#skills" role="menuitem">Skills</a><br/>
         <a href="#projects" role="menuitem">Projects</a><br/>
         <a href="#experience" role="menuitem">Experience</a><br/>
         <a href="#testimonial" role="menuitem">Testimonials</a>
@@ -503,34 +520,38 @@
             <div class="small muted">Short summary</div>
             </div>
 
-            <div class="about about-grid">
-                <div class="card">
-                    <p class="small">I create web interfaces that focus on performance, readability, and minimal aesthetics. I enjoy solving complex interface problems into simple, meaningful experiences that feel intuitive and visually balanced. My approach combines clean design principles with efficient code, ensuring that every project not only looks good but also performs seamlessly across devices.</p>
-                    <ul style="margin-top:0.9rem; padding-left:1.1rem;">
-                        <li class="small">Location: Cilegon, Banten, Indonesia</li>
-                        <li class="small">Email: <a href="mailto:mteguh0106@gmail.com" class="muted">mteguh0106@gmail.com</a></li>
-                        <li class="small">Status: Available for freelance / contract / work</li>
-                    </ul>
-                </div>
-
-                <aside class="card" aria-label="Keahlian singkat">
-                    <h3 style="margin:0 0 .6rem;color:var(--text)">SKILLS</h3>
-                    <div class="skills">
-                        <div class="skill-row"><div class="skill-name">HTML & Semantik</div><div class="skill-bar"><div class="skill-fill" data-fill="95%"></div></div></div>
-                        <div class="skill-row"><div class="skill-name">CSS (Native)</div><div class="skill-bar"><div class="skill-fill" data-fill="92%"></div></div></div>
-                        <div class="skill-row"><div class="skill-name">Laravel</div><div class="skill-bar"><div class="skill-fill" data-fill="86%"></div></div></div>
-                        <div class="skill-row"><div class="skill-name">SQL</div><div class="skill-bar"><div class="skill-fill" data-fill="82%"></div></div></div>
-                        <div class="skill-row"><div class="skill-name">Figma</div><div class="skill-bar"><div class="skill-fill" data-fill="82%"></div></div></div>
-                    </div>
-                </aside>
+            <div class="card">
+                <p class="small">I create web interfaces that focus on performance, readability, and minimal aesthetics. I enjoy solving complex interface problems into simple, meaningful experiences that feel intuitive and visually balanced. My approach combines clean design principles with efficient code, ensuring that every project not only looks good but also performs seamlessly across devices.</p>
+                <ul style="margin-top:0.9rem; padding-left:1.1rem;">
+                    <!-- <li class="small">Location: Cilegon, Banten, Indonesia</li> -->
+                    <li class="small">Email: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mteguh0106@gmail.com" target="_blank" class="muted">mteguh0106@gmail.com</a></li>
+                    <li class="small">Status: Available for freelance / contract / work</li>
+                </ul>
             </div>
         </section>
 
-            <!-- PROJECTS / PORTFOLIO -->
 
+        <!-- Skills -->
+        <section id="skills" class="delay-1" aria-labelledby="skills-title">
+            <div class="section-head">
+                <h2 id="skills-title" class="section-title">Skills</h2>
+                <div class="small muted">Core Experience</div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card">HTML & Semantik</div>
+                <div class="skill-card">CSS (Native)</div>
+                <div class="skill-card">Laravel</div>
+                <div class="skill-card">SQL</div>
+                <div class="skill-card">Figma</div>
+            </div>
+        </section>
+
+
+        <!-- PROJECTS / PORTFOLIO -->
         <section id="projects" class=" delay-2" aria-labelledby="projects-title">
             <div class="section-head">
-            <h2 id="projects-title" class="section-title">Projects</h2>
+                <h2 id="projects-title" class="section-title">Projects</h2>
             <div class="small muted">Featured Projects</div>
             </div>
 
@@ -684,21 +705,6 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     
-
-    // Animate skills bars when in viewport
-    const skillFills = document.querySelectorAll('.skill-fill');
-    const obs = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const w = el.getAttribute('data-fill') || '80%';
-          el.style.width = w;
-          observer.unobserve(el);
-        }
-      });
-    }, { threshold: 0.3 });
-
-    skillFills.forEach(s => obs.observe(s));
 
     // Accessibility: close mobile menu when focus moves away (improve UX)
     document.addEventListener('click', (e) => {
